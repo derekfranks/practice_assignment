@@ -8,6 +8,14 @@ This guided example, will **not** provide an "solution" for programming assignme
 To begin, download this file and unzip it into your R working directory.  
 https://dl.dropboxusercontent.com/u/8036886/diet_data.zip
 
+You can do  this in R with the following code:
+```{r}
+dataset.url <- "http://dl.dropboxusercontent.com/u/8036886/diet_data.zip"
+download.file(dataset.url, "diet_data.zip")
+unzip("diet_data.zip", exdir = "diet_data")
+```
+
+
 If you're not sure where your working directory is, you can find out with the getwd() command.  Alternatively, you can view/change it through the Tools > Global Options menu in R Studio.
 
 So assuming you've unzipped the file into your R directory, you should have a folder called diet_data.  In that folder there are five files.  Let's get a list of those files:

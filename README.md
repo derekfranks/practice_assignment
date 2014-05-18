@@ -7,8 +7,8 @@ If you're not familiar with R and you're not familiar with programming concepts 
 
 I've created a practice programming assignment that should help bridge the gap.  It walks you through some basic concepts and ultimately helps you create a function bringing those concepts all together.  It does not provide a solution for Programming Assignment 1, but if you can work your way through this guided example, you should have the tools to complete part 1 of assignment 1.  Part 2 and 3 are a little more complicated, but build on the ideas from part 1.
 
-The instructions are available in both R Markdown and pdf formats.
+The instructions are available in md, rmd, html and pdf formats.
 
-Just unzip the diet_data.zip file into your R working directory so that you've got a folder called 'diet_data' which contains 5 csv files.
+Just unzip the diet_data.zip file into your R working directory so that you've got a folder called 'diet_data' which contains 5 csv files.  I've included directions for doing this within R in the instructions.
 
 Hopefully others will find this useful.  I'll keep tabs on this thread to answer any questions.

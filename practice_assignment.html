@@ -459,7 +459,7 @@ for (i in 1:5) {
 
 <p>So 190 is the median weight.  We can find the median weight of day 30 by taking the median of a subset of the data where Day=30.</p>
 
-<pre><code class="r">dat_30 &lt;- subset(dat, dat$Day == 30)
+<pre><code class="r">dat_30 &lt;- dat[dat[, &quot;Day&quot;] == 30, ]
 dat_30
 </code></pre>
 

@@ -361,7 +361,7 @@ median(dat$Weight, na.rm = TRUE)
 So 190 is the median weight.  We can find the median weight of day 30 by taking the median of a subset of the data where Day=30.
 
 ```r
-dat_30 <- subset(dat, dat$Day == 30)
+dat_30 <- dat[dat[, "Day"] == 30, ]
 dat_30
 ```
 

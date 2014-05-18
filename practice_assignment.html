@@ -190,8 +190,8 @@ hljs.initHighlightingOnLoad();
 
 <p>You can do  this in R with the following code:</p>
 
-<pre><code class="r">dataset.url &lt;- &quot;http://dl.dropboxusercontent.com/u/8036886/diet_data.zip&quot;
-download.file(dataset.url, &quot;diet_data.zip&quot;)
+<pre><code class="r">dataset_url &lt;- &quot;http://dl.dropboxusercontent.com/u/8036886/diet_data.zip&quot;
+download.file(dataset_url, &quot;diet_data.zip&quot;)
 unzip(&quot;diet_data.zip&quot;, exdir = &quot;diet_data&quot;)
 </code></pre>
 
@@ -207,8 +207,8 @@ unzip(&quot;diet_data.zip&quot;, exdir = &quot;diet_data&quot;)
 
 <p>Okay, so we have 5 files.  Let&#39;s take a look at one to see what&#39;s inside:</p>
 
-<pre><code class="r">Andy &lt;- read.csv(&quot;diet_data/Andy.csv&quot;)
-head(Andy)
+<pre><code class="r">andy &lt;- read.csv(&quot;diet_data/Andy.csv&quot;)
+head(andy)
 </code></pre>
 
 <pre><code>##   Patient.Name Age Weight Day
@@ -222,7 +222,7 @@ head(Andy)
 
 <p>It appears that the file has 4 columns, Patient.Name, Age, Weight, and Day.  Let&#39;s figure out how many rows there are by looking at the length of the &#39;Day&#39; column:</p>
 
-<pre><code class="r">length(Andy$Day)
+<pre><code class="r">length(andy$Day)
 </code></pre>
 
 <pre><code>## [1] 30
@@ -232,7 +232,7 @@ head(Andy)
 
 <p>Alternatively, you could look at the dimensions of the data.frame:</p>
 
-<pre><code class="r">dim(Andy)
+<pre><code class="r">dim(andy)
 </code></pre>
 
 <pre><code>## [1] 30  4
@@ -244,7 +244,7 @@ head(Andy)
 
 <p>Let&#39;s play around with a couple of concepts.  First, how would we see Andy&#39;s starting weight?  We want to subset the data.  Specifically, the first row of the &#39;Weight&#39; column:</p>
 
-<pre><code class="r">Andy[1, &quot;Weight&quot;]
+<pre><code class="r">andy[1, &quot;Weight&quot;]
 </code></pre>
 
 <pre><code>## [1] 140
@@ -252,7 +252,7 @@ head(Andy)
 
 <p>We can do the same thing to find his final weight on Day 30:</p>
 
-<pre><code class="r">Andy[30, &quot;Weight&quot;]
+<pre><code class="r">andy[30, &quot;Weight&quot;]
 </code></pre>
 
 <pre><code>## [1] 135
@@ -260,13 +260,13 @@ head(Andy)
 
 <p>Alternatively, you could create a subset of the &#39;Weight&#39; column where the data where &#39;Day&#39; is equal to 30.</p>
 
-<pre><code class="r">Andy[Andy$Day == 30, &quot;Weight&quot;]
+<pre><code class="r">andy[andy$Day == 30, &quot;Weight&quot;]
 </code></pre>
 
 <pre><code>## [1] 135
 </code></pre>
 
-<pre><code class="r">Andy[Andy[, &quot;Day&quot;] == 30, &quot;Weight&quot;]
+<pre><code class="r">andy[andy[, &quot;Day&quot;] == 30, &quot;Weight&quot;]
 </code></pre>
 
 <pre><code>## [1] 135
@@ -276,14 +276,14 @@ head(Andy)
 
 <p>Let&#39;s assign Andy&#39;s starting and ending weight to vectors:</p>
 
-<pre><code class="r">AndyStart &lt;- Andy[1, &quot;Weight&quot;]
-AndyEnd &lt;- Andy[30, &quot;Weight&quot;]
+<pre><code class="r">andy_start &lt;- andy[1, &quot;Weight&quot;]
+andy_end &lt;- andy[30, &quot;Weight&quot;]
 </code></pre>
 
 <p>We can find out how much weight he lost by subtracting the vectors:</p>
 
-<pre><code class="r">AndyLoss &lt;- AndyStart - AndyEnd
-AndyLoss
+<pre><code class="r">andy_loss &lt;- andy_start - andy_end
+andy_loss
 </code></pre>
 
 <pre><code>## [1] 5
@@ -361,12 +361,12 @@ files_full
 
 <p>Success!  So what if we wanted to create one big data frame with everybody&#39;s data in it?  We&#39;d do that with rbind and a loop.  Let&#39;s start with rbind:</p>
 
-<pre><code class="r">Andy_David &lt;- rbind(Andy, read.csv(files_full[2]))
+<pre><code class="r">andy_david &lt;- rbind(andy, read.csv(files_full[2]))
 </code></pre>
 
 <p>This line of code took our existing data frame, Andy, and added the rows from David.csv to the end of it.  We can check this with:</p>
 
-<pre><code class="r">head(Andy_David)
+<pre><code class="r">head(andy_david)
 </code></pre>
 
 <pre><code>##   Patient.Name Age Weight Day
@@ -378,7 +378,7 @@ files_full
 ## 6         Andy  30    138   6
 </code></pre>
 
-<pre><code class="r">tail(Andy_David)
+<pre><code class="r">tail(andy_david)
 </code></pre>
 
 <pre><code>##    Patient.Name Age Weight Day
@@ -396,8 +396,8 @@ files_full
 
 <p>Now, let&#39;s create a subset of the data frame that shows us just the 25th day for Andy and David.</p>
 
-<pre><code class="r">Day25 &lt;- subset(Andy_David, Andy_David$Day == 25)
-Day25
+<pre><code class="r">day_25 &lt;- subset(andy_david, andy_david$Day == 25)
+day_25
 </code></pre>
 
 <pre><code>##    Patient.Name Age Weight Day

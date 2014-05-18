@@ -11,8 +11,8 @@ https://dl.dropboxusercontent.com/u/8036886/diet_data.zip
 You can do  this in R with the following code:
 
 ```r
-dataset.url <- "http://dl.dropboxusercontent.com/u/8036886/diet_data.zip"
-download.file(dataset.url, "diet_data.zip")
+dataset_url <- "http://dl.dropboxusercontent.com/u/8036886/diet_data.zip"
+download.file(dataset_url, "diet_data.zip")
 unzip("diet_data.zip", exdir = "diet_data")
 ```
 
@@ -36,8 +36,8 @@ Okay, so we have 5 files.  Let's take a look at one to see what's inside:
 
 
 ```r
-Andy <- read.csv("diet_data/Andy.csv")
-head(Andy)
+andy <- read.csv("diet_data/Andy.csv")
+head(andy)
 ```
 
 ```
@@ -55,7 +55,7 @@ It appears that the file has 4 columns, Patient.Name, Age, Weight, and Day.  Let
 
 
 ```r
-length(Andy$Day)
+length(andy$Day)
 ```
 
 ```
@@ -68,7 +68,7 @@ length(Andy$Day)
 Alternatively, you could look at the dimensions of the data.frame:
 
 ```r
-dim(Andy)
+dim(andy)
 ```
 
 ```
@@ -83,7 +83,7 @@ So we have 30 days of data.  To save you time, all of the other files match this
 Let's play around with a couple of concepts.  First, how would we see Andy's starting weight?  We want to subset the data.  Specifically, the first row of the 'Weight' column:
 
 ```r
-Andy[1, "Weight"]
+andy[1, "Weight"]
 ```
 
 ```
@@ -94,7 +94,7 @@ Andy[1, "Weight"]
 We can do the same thing to find his final weight on Day 30:
 
 ```r
-Andy[30, "Weight"]
+andy[30, "Weight"]
 ```
 
 ```
@@ -105,7 +105,7 @@ Andy[30, "Weight"]
 Alternatively, you could create a subset of the 'Weight' column where the data where 'Day' is equal to 30.
 
 ```r
-Andy[Andy$Day == 30, "Weight"]
+andy[andy$Day == 30, "Weight"]
 ```
 
 ```
@@ -113,7 +113,7 @@ Andy[Andy$Day == 30, "Weight"]
 ```
 
 ```r
-Andy[Andy[, "Day"] == 30, "Weight"]
+andy[andy[, "Day"] == 30, "Weight"]
 ```
 
 ```
@@ -126,16 +126,16 @@ There are lots of ways to get from A to B when using R.  However it's important 
 Let's assign Andy's starting and ending weight to vectors:
 
 ```r
-AndyStart <- Andy[1, "Weight"]
-AndyEnd <- Andy[30, "Weight"]
+andy_start <- andy[1, "Weight"]
+andy_end <- andy[30, "Weight"]
 ```
 
 
 We can find out how much weight he lost by subtracting the vectors:
 
 ```r
-AndyLoss <- AndyStart - AndyEnd
-AndyLoss
+andy_loss <- andy_start - andy_end
+andy_loss
 ```
 
 ```
@@ -238,14 +238,14 @@ Success!  So what if we wanted to create one big data frame with everybody's dat
 
 
 ```r
-Andy_David <- rbind(Andy, read.csv(files_full[2]))
+andy_david <- rbind(andy, read.csv(files_full[2]))
 ```
 
 
 This line of code took our existing data frame, Andy, and added the rows from David.csv to the end of it.  We can check this with:
 
 ```r
-head(Andy_David)
+head(andy_david)
 ```
 
 ```
@@ -259,7 +259,7 @@ head(Andy_David)
 ```
 
 ```r
-tail(Andy_David)
+tail(andy_david)
 ```
 
 ```
@@ -280,8 +280,8 @@ Don't worry if you can't imagine when that would be useful because you'll see an
 Now, let's create a subset of the data frame that shows us just the 25th day for Andy and David.
 
 ```r
-Day25 <- subset(Andy_David, Andy_David$Day == 25)
-Day25
+day_25 <- subset(andy_david, andy_david$Day == 25)
+day_25
 ```
 
 ```

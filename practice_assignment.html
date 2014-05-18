@@ -502,7 +502,7 @@ dat_30
         # loops through the files, rbinding them together
         dat &lt;- rbind(dat, read.csv(files_list[i]))
     }
-    dat_subset &lt;- subset(dat, dat$Day == day)  #subsets the rows matching the &#39;day&#39; argument
+    dat_subset &lt;- dat[dat[, &quot;Day&quot;] == day, ]  #subsets the rows that match the &#39;day&#39; argument
     median(dat_subset$Weight, na.rm = TRUE)  #identifies the median of the subset 
     # while stripping out the NAs
 }

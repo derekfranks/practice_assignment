@@ -1,6 +1,3 @@
----
-output: word_document
----
 Practice Assignment
 ========================================================
 

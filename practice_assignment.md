@@ -1,3 +1,6 @@
+---
+output: word_document
+---
 Practice Assignment
 ========================================================
 
@@ -17,7 +20,6 @@ unzip("diet_data.zip", exdir = "diet_data")
 ```
 
 
-
 If you're not sure where your working directory is, you can find out with the getwd() command.  Alternatively, you can view/change it through the Tools > Global Options menu in R Studio.
 
 So assuming you've unzipped the file into your R directory, you should have a folder called diet_data.  In that folder there are five files.  Let's get a list of those files:
@@ -30,7 +32,6 @@ list.files("diet_data")
 ```
 ## [1] "Andy.csv"  "David.csv" "John.csv"  "Mike.csv"  "Steve.csv"
 ```
-
 
 Okay, so we have 5 files.  Let's take a look at one to see what's inside:
 
@@ -50,7 +51,6 @@ head(andy)
 ## 6         Andy  30    138   6
 ```
 
-
 It appears that the file has 4 columns, Patient.Name, Age, Weight, and Day.  Let's figure out how many rows there are by looking at the length of the 'Day' column:
 
 
@@ -61,7 +61,6 @@ length(andy$Day)
 ```
 ## [1] 30
 ```
-
 
 30 rows.  OK.
 
@@ -74,7 +73,6 @@ dim(andy)
 ```
 ## [1] 30  4
 ```
-
 
 This tells us that we 30 rows of data in 4 columns.
 
@@ -90,7 +88,6 @@ andy[1, "Weight"]
 ## [1] 140
 ```
 
-
 We can do the same thing to find his final weight on Day 30:
 
 ```r
@@ -100,7 +97,6 @@ andy[30, "Weight"]
 ```
 ## [1] 135
 ```
-
 
 Alternatively, you could create a subset of the 'Weight' column where the data where 'Day' is equal to 30.
 
@@ -113,12 +109,23 @@ andy[andy$Day == 30, "Weight"]
 ```
 
 ```r
-andy[andy[, "Day"] == 30, "Weight"]
+andy[andy[,"Day"]==30, "Weight"]
 ```
 
 ```
 ## [1] 135
 ```
+
+Or, we could use the subset function to do the same thing:
+
+```r
+subset(andy$Weight, andy$Day==30)
+```
+
+```
+## [1] 135
+```
+
 
 
 There are lots of ways to get from A to B when using R.  However it's important to understand some of the various approaches to subsetting data.
@@ -130,7 +137,6 @@ andy_start <- andy[1, "Weight"]
 andy_end <- andy[30, "Weight"]
 ```
 
-
 We can find out how much weight he lost by subtracting the vectors:
 
 ```r
@@ -141,7 +147,6 @@ andy_loss
 ```
 ## [1] 5
 ```
-
 
 Andy lost 5 pounds over the 30 days.  Not bad.  What if we want to look at other subjects or maybe even everybody at once?  
 
@@ -157,7 +162,6 @@ files
 ```
 ## [1] "Andy.csv"  "David.csv" "John.csv"  "Mike.csv"  "Steve.csv"
 ```
-
 
 Knowing that 'files' is now a list of the contents of 'diet_data' in alphabetical order, we can call a specific file by subsetting it:
 
@@ -185,7 +189,6 @@ files[3:5]
 ## [1] "John.csv"  "Mike.csv"  "Steve.csv"
 ```
 
-
 Let's take a quick look at John.csv:
 
 ```r
@@ -200,14 +203,13 @@ head(read.csv(files[3]))
 ## Error: cannot open the connection
 ```
 
-
 Woah, what happened?  Well, John.csv is sitting inside the diet_data folder.  We just tried to run the equivalent of read.csv("John.csv") and R correctly told us that there isn't a file called John.csv in our working directory.  To fix this, we need to append the directory to the beginning of the file name.
 
 One approach would be to use paste() or sprintf().  However, if you go back to the help file for list.files(), you'll see that there is an argument called full.names that will append (technically prepend) the path to the file name for us.
 
 
 ```r
-files_full <- list.files("diet_data", full.names = TRUE)
+files_full <- list.files("diet_data", full.names=TRUE)
 files_full
 ```
 
@@ -215,7 +217,6 @@ files_full
 ## [1] "diet_data/Andy.csv"  "diet_data/David.csv" "diet_data/John.csv" 
 ## [4] "diet_data/Mike.csv"  "diet_data/Steve.csv"
 ```
-
 
 Pretty cool.  Now let's try taking a look at John.csv again:
 
@@ -233,14 +234,12 @@ head(read.csv(files_full[3]))
 ## 6         John  22    175   6
 ```
 
-
 Success!  So what if we wanted to create one big data frame with everybody's data in it?  We'd do that with rbind and a loop.  Let's start with rbind:
 
 
 ```r
 andy_david <- rbind(andy, read.csv(files_full[2]))
 ```
-
 
 This line of code took our existing data frame, Andy, and added the rows from David.csv to the end of it.  We can check this with:
 
@@ -272,7 +271,6 @@ tail(andy_david)
 ## 60        David  35    201  30
 ```
 
-
 One thing to note, rbind needs 2 arguments.  The first is an existing data frame and the second is what you want to append to it.  This means that there are occassions when you might want to create an empty data frame just so there's *something* to use as the existing data frame in the rbind argument.  
 
 Don't worry if you can't imagine when that would be useful because you'll see an example in just a little while.
@@ -280,7 +278,7 @@ Don't worry if you can't imagine when that would be useful because you'll see an
 Now, let's create a subset of the data frame that shows us just the 25th day for Andy and David.
 
 ```r
-day_25 <- subset(andy_david, andy_david$Day == 25)
+day_25 <- andy_david[andy_david$Day == 25, ]
 day_25
 ```
 
@@ -290,15 +288,12 @@ day_25
 ## 55        David  35    203  25
 ```
 
-
 Now you could manually go through and append everybody's data to the same data frame using rbind, but that's not a practical solution if you've got lots and lots of files.  So let's try using a loop.
 
 To understand what's happening in a loop, let's try something:
 
 ```r
-for (i in 1:5) {
-    print(i)
-}
+for (i in 1:5) {print(i)}
 ```
 
 ```
@@ -309,13 +304,12 @@ for (i in 1:5) {
 ## [1] 5
 ```
 
-
 As you can see, for each pass through the loop, i increases by 1 from 1 through 5.  Let's apply that concept to our list of files.
 
 
 ```r
 for (i in 1:5) {
-    dat <- rbind(dat, read.csv(files_full[i]))
+        dat <- rbind(dat, read.csv(files_full[i]))
 }
 ```
 
@@ -323,16 +317,14 @@ for (i in 1:5) {
 ## Error: object 'dat' not found
 ```
 
-
 Whoops.  Object 'dat' not found.  This is because you can't rbind something into a file that doesn't exist yet.  So let's create an empty data frame called 'dat' before running the loop.
 
 ```r
 dat <- data.frame()
 for (i in 1:5) {
-    dat <- rbind(dat, read.csv(files_full[i]))
+        dat <- rbind(dat, read.csv(files_full[i]))
 }
 ```
-
 
 Cool.  We now have a data frame called 'dat' with all of our data in it.  So what if we wanted to know the median weight for all the data?  Let's use the median() function.
 
@@ -344,24 +336,22 @@ median(dat$Weight)
 ## [1] NA
 ```
 
-
 NA?  Why did that happen?  Type 'dat' into the console and you'll see a print out of all 150 obversations.  Scroll back up to row 77, and you'll see that we have some missing data from John, which is recorded as NA by R.  
 
 We need to get rid of those NA's for the purposes of calculating the median.  There are several approaches.  We could subset the data using complete.cases.  But if you look at '?median', you'll see there is an argument called 'na.rm' that will strip the NA values out for us.
 
 ```r
-median(dat$Weight, na.rm = TRUE)
+median(dat$Weight, na.rm=TRUE)
 ```
 
 ```
 ## [1] 190
 ```
 
-
 So 190 is the median weight.  We can find the median weight of day 30 by taking the median of a subset of the data where Day=30.
 
 ```r
-dat_30 <- dat[dat[, "Day"] == 30, ]
+dat_30 <- dat[dat[, "Day"] == 30,]
 dat_30
 ```
 
@@ -381,7 +371,6 @@ median(dat_30$Weight)
 ```
 ## [1] 192
 ```
-
 
 We've done a lot of manual data manipulation so far.  Let's build a function that will return the median weight of a given day.
 
@@ -403,19 +392,17 @@ So what does the function look like?
 
 
 ```r
-weightmedian <- function(directory, day) {
-    files_list <- dir(directory, full.names = TRUE)  #creates a list of files
-    dat <- data.frame()  #creates an empty data frame
-    for (i in 1:5) {
-        # loops through the files, rbinding them together
-        dat <- rbind(dat, read.csv(files_list[i]))
-    }
-    dat_subset <- dat[dat[, "Day"] == day, ]  #subsets the rows that match the 'day' argument
-    median(dat_subset$Weight, na.rm = TRUE)  #identifies the median of the subset 
-    # while stripping out the NAs
+weightmedian <- function(directory, day)  {
+        files_list <- dir(directory, full.names=TRUE)   #creates a list of files
+        dat <- data.frame()                             #creates an empty data frame
+        for (i in 1:5) {                                #loops through the files, rbinding them together 
+                dat <- rbind(dat, read.csv(files_list[i]))
+        }
+        dat_subset <- dat[dat[, "Day"] == day,]         #subsets the rows that match the 'day' argument
+        median(dat_subset$Weight, na.rm=TRUE)           #identifies the median of the subset 
+                                                        #while stripping out the NAs
 }
 ```
-
 
 You can test this function by running it a few different times:
 
@@ -443,7 +430,6 @@ weightmedian("diet_data", 17)
 ```
 ## [1] 198
 ```
-
 
 Hopefully, this has given you some practice applying the basic concepts from weeks 1 and 2.  If you can work your way through this example, you should have all of the tools needed to complete part 1 of assignment 1.  Parts 2 and 3 are really just expanding on the same basic concepts, potentially adding in some ideas like cbinds and if-else.
 

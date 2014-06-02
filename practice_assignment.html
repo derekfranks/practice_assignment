@@ -266,7 +266,15 @@ head(andy)
 <pre><code>## [1] 135
 </code></pre>
 
-<pre><code class="r">andy[andy[, &quot;Day&quot;] == 30, &quot;Weight&quot;]
+<pre><code class="r">andy[andy[,&quot;Day&quot;]==30, &quot;Weight&quot;]
+</code></pre>
+
+<pre><code>## [1] 135
+</code></pre>
+
+<p>Or, we could use the subset function to do the same thing:</p>
+
+<pre><code class="r">subset(andy$Weight, andy$Day==30)
 </code></pre>
 
 <pre><code>## [1] 135
@@ -337,7 +345,7 @@ files
 
 <p>One approach would be to use paste() or sprintf().  However, if you go back to the help file for list.files(), you&#39;ll see that there is an argument called full.names that will append (technically prepend) the path to the file name for us.</p>
 
-<pre><code class="r">files_full &lt;- list.files(&quot;diet_data&quot;, full.names = TRUE)
+<pre><code class="r">files_full &lt;- list.files(&quot;diet_data&quot;, full.names=TRUE)
 files_full
 </code></pre>
 
@@ -396,7 +404,7 @@ files_full
 
 <p>Now, let&#39;s create a subset of the data frame that shows us just the 25th day for Andy and David.</p>
 
-<pre><code class="r">day_25 &lt;- subset(andy_david, andy_david$Day == 25)
+<pre><code class="r">day_25 &lt;- andy_david[andy_david$Day == 25, ]
 day_25
 </code></pre>
 
@@ -409,9 +417,7 @@ day_25
 
 <p>To understand what&#39;s happening in a loop, let&#39;s try something:</p>
 
-<pre><code class="r">for (i in 1:5) {
-    print(i)
-}
+<pre><code class="r">for (i in 1:5) {print(i)}
 </code></pre>
 
 <pre><code>## [1] 1
@@ -424,7 +430,7 @@ day_25
 <p>As you can see, for each pass through the loop, i increases by 1 from 1 through 5.  Let&#39;s apply that concept to our list of files.</p>
 
 <pre><code class="r">for (i in 1:5) {
-    dat &lt;- rbind(dat, read.csv(files_full[i]))
+        dat &lt;- rbind(dat, read.csv(files_full[i]))
 }
 </code></pre>
 
@@ -435,7 +441,7 @@ day_25
 
 <pre><code class="r">dat &lt;- data.frame()
 for (i in 1:5) {
-    dat &lt;- rbind(dat, read.csv(files_full[i]))
+        dat &lt;- rbind(dat, read.csv(files_full[i]))
 }
 </code></pre>
 
@@ -451,7 +457,7 @@ for (i in 1:5) {
 
 <p>We need to get rid of those NA&#39;s for the purposes of calculating the median.  There are several approaches.  We could subset the data using complete.cases.  But if you look at &#39;?median&#39;, you&#39;ll see there is an argument called &#39;na.rm&#39; that will strip the NA values out for us.</p>
 
-<pre><code class="r">median(dat$Weight, na.rm = TRUE)
+<pre><code class="r">median(dat$Weight, na.rm=TRUE)
 </code></pre>
 
 <pre><code>## [1] 190
@@ -459,7 +465,7 @@ for (i in 1:5) {
 
 <p>So 190 is the median weight.  We can find the median weight of day 30 by taking the median of a subset of the data where Day=30.</p>
 
-<pre><code class="r">dat_30 &lt;- dat[dat[, &quot;Day&quot;] == 30, ]
+<pre><code class="r">dat_30 &lt;- dat[dat[, &quot;Day&quot;] == 30,]
 dat_30
 </code></pre>
 
@@ -495,16 +501,15 @@ dat_30
 
 <p>So what does the function look like?</p>
 
-<pre><code class="r">weightmedian &lt;- function(directory, day) {
-    files_list &lt;- dir(directory, full.names = TRUE)  #creates a list of files
-    dat &lt;- data.frame()  #creates an empty data frame
-    for (i in 1:5) {
-        # loops through the files, rbinding them together
-        dat &lt;- rbind(dat, read.csv(files_list[i]))
-    }
-    dat_subset &lt;- dat[dat[, &quot;Day&quot;] == day, ]  #subsets the rows that match the &#39;day&#39; argument
-    median(dat_subset$Weight, na.rm = TRUE)  #identifies the median of the subset 
-    # while stripping out the NAs
+<pre><code class="r">weightmedian &lt;- function(directory, day)  {
+        files_list &lt;- dir(directory, full.names=TRUE)   #creates a list of files
+        dat &lt;- data.frame()                             #creates an empty data frame
+        for (i in 1:5) {                                #loops through the files, rbinding them together 
+                dat &lt;- rbind(dat, read.csv(files_list[i]))
+        }
+        dat_subset &lt;- dat[dat[, &quot;Day&quot;] == day,]         #subsets the rows that match the &#39;day&#39; argument
+        median(dat_subset$Weight, na.rm=TRUE)           #identifies the median of the subset 
+                                                        #while stripping out the NAs
 }
 </code></pre>
 

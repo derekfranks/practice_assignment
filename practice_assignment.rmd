@@ -1,3 +1,6 @@
+---
+output: word_document
+---
 Practice Assignment
 ========================================================
 
@@ -63,6 +66,13 @@ Alternatively, you could create a subset of the 'Weight' column where the data w
 andy[andy$Day == 30, "Weight"]
 andy[andy[,"Day"]==30, "Weight"]
 ```
+
+Or, we could use the subset function to do the same thing:
+```{r}
+subset(andy$Weight, andy$Day==30)
+```
+
+
 
 There are lots of ways to get from A to B when using R.  However it's important to understand some of the various approaches to subsetting data.
 
@@ -132,7 +142,7 @@ Don't worry if you can't imagine when that would be useful because you'll see an
 
 Now, let's create a subset of the data frame that shows us just the 25th day for Andy and David.
 ```{r}
-day_25 <- subset(andy_david, andy_david$Day == 25)
+day_25 <- andy_david[andy_david$Day == 25, ]
 day_25
 ```
 

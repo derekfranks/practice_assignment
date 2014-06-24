@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 Practice Assignment
 ========================================================
 
@@ -103,11 +106,11 @@ files[3:5]
 ```
 
 Let's take a quick look at John.csv:
-```{r}
+```{r error=TRUE}
 head(read.csv(files[3]))
 ```
 
-Woah, what happened?  Well, John.csv is sitting inside the diet_data folder.  We just tried to run the equivalent of read.csv("John.csv") and R correctly told us that there isn't a file called John.csv in our working directory.  To fix this, we need to append the directory to the beginning of the file name.
+Woah, what happened?  Well, John.csv is sitting inside the diet_data folder.  We just tried to run the equivalent of r read.csv("John.csv") and R correctly told us that there isn't a file called John.csv in our working directory.  To fix this, we need to append the directory to the beginning of the file name.
 
 One approach would be to use paste() or sprintf().  However, if you go back to the help file for list.files(), you'll see that there is an argument called full.names that will append (technically prepend) the path to the file name for us.
 
@@ -152,7 +155,7 @@ for (i in 1:5) {print(i)}
 
 As you can see, for each pass through the loop, i increases by 1 from 1 through 5.  Let's apply that concept to our list of files.
 
-```{r}
+```{r error=TRUE}
 for (i in 1:5) {
         dat <- rbind(dat, read.csv(files_full[i]))
 }
@@ -225,5 +228,3 @@ weightmedian("diet_data", 17)
 ```
 
 Hopefully, this has given you some practice applying the basic concepts from weeks 1 and 2.  If you can work your way through this example, you should have all of the tools needed to complete part 1 of assignment 1.  Parts 2 and 3 are really just expanding on the same basic concepts, potentially adding in some ideas like cbinds and if-else.
-
-I'm going to start a forum thread for this "practice assignment" and will do my best to answer questions.

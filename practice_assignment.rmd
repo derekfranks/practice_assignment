@@ -110,7 +110,7 @@ Let's take a quick look at John.csv:
 head(read.csv(files[3]))
 ```
 
-Woah, what happened?  Well, John.csv is sitting inside the diet_data folder.  We just tried to run the equivalent of r read.csv("John.csv") and R correctly told us that there isn't a file called John.csv in our working directory.  To fix this, we need to append the directory to the beginning of the file name.
+Woah, what happened?  Well, John.csv is sitting inside the diet_data folder.  We just tried to run the equivalent of read.csv("John.csv") and R correctly told us that there isn't a file called John.csv in our working directory.  To fix this, we need to append the directory to the beginning of the file name.
 
 One approach would be to use paste() or sprintf().  However, if you go back to the help file for list.files(), you'll see that there is an argument called full.names that will append (technically prepend) the path to the file name for us.
 

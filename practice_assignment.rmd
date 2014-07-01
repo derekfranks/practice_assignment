@@ -6,7 +6,7 @@ Practice Assignment
 
 The goal of this assignment is to provide a "bridge" between the first two weeks of lectures and assignment 1 for those either new to R or struggling with how to approach the assignment.
 
-This guided example, will **not** provide an "solution" for programming assignment 1.  However, it will guide you through some core concepts and give you some practical experience to hopefully make assignment 1 seems less daunting.
+This guided example, will **not** provide a solution for programming assignment 1.  However, it will guide you through some core concepts and give you some practical experience to hopefully make assignment 1 seems less daunting.
 
 To begin, download this file and unzip it into your R working directory.  
 https://dl.dropboxusercontent.com/u/8036886/diet_data.zip
@@ -214,7 +214,7 @@ So what does the function look like?
 
 ```{r}
 weightmedian <- function(directory, day)  {
-        files_list <- dir(directory, full.names=TRUE)   #creates a list of files
+        files_list <- list.files(directory, full.names=TRUE)   #creates a list of files
         dat <- data.frame()                             #creates an empty data frame
         for (i in 1:5) {                                #loops through the files, rbinding them together 
                 dat <- rbind(dat, read.csv(files_list[i]))

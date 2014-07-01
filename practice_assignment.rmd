@@ -13,7 +13,7 @@ https://dl.dropboxusercontent.com/u/8036886/diet_data.zip
 
 You can do  this in R with the following code:
 ```{r}
-dataset_url <- "http://dl.dropboxusercontent.com/u/8036886/diet_data.zip"
+dataset_url <- "http://s3.amazonaws.com/practice_assignment/diet_data.zip"
 download.file(dataset_url, "diet_data.zip")
 unzip("diet_data.zip", exdir = "diet_data")
 ```
@@ -47,7 +47,13 @@ Alternatively, you could look at the dimensions of the data.frame:
 dim(andy)
 ```
 
-This tells us that we 30 rows of data in 4 columns.
+This tells us that we 30 rows of data in 4 columns.  There are some other commands we might want to run to get a feel for a new data file, str(), summary(), and names().
+
+```{r}
+str(andy)
+summary(andy)
+names(andy)
+```
 
 So we have 30 days of data.  To save you time, all of the other files match this format and length.  I've made up 30 days worth of weight data for 5 subjects of an imaginary diet study.
 

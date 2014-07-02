@@ -9,7 +9,7 @@ The goal of this assignment is to provide a "bridge" between the first two weeks
 This guided example, will **not** provide a solution for programming assignment 1.  However, it will guide you through some core concepts and give you some practical experience to hopefully make assignment 1 seems less daunting.
 
 To begin, download this file and unzip it into your R working directory.  
-https://dl.dropboxusercontent.com/u/8036886/diet_data.zip
+http://s3.amazonaws.com/practice_assignment/diet_data.zip
 
 You can do  this in R with the following code:
 ```{r}

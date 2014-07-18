@@ -168,21 +168,38 @@ for (i in 1:5) {
 ```
 
 Whoops.  Object 'dat' not found.  This is because you can't rbind something into a file that doesn't exist yet.  So let's create an empty data frame called 'dat' before running the loop.
+
 ```{r}
 dat <- data.frame()
 for (i in 1:5) {
         dat <- rbind(dat, read.csv(files_full[i]))
 }
+str(dat)
 ```
 
-Cool.  We now have a data frame called 'dat' with all of our data in it.  So what if we wanted to know the median weight for all the data?  Let's use the median() function.
+Cool.  We now have a data frame called 'dat' with all of our data in it.  Out of curiousity, what would happen if we had put dat <- data.frame() inside of the loop?  Let's see:
+
+```{r}
+for (i in 1:5) {
+        dat2 <- data.frame()
+        dat2 <- rbind(dat2, read.csv(files_full[i]))
+}
+str(dat2)
+head(dat2)
+```
+
+Because we put dat2 <- data.frame() inside of the loop, dat2 is being rewritten with each pass of the loop.  So we only end up with the data from the last file in our list.
+
+
+Back to dat... So what if we wanted to know the median weight for all the data?  Let's use the median() function.
+
 ```{r}
 median(dat$Weight)
 ```
 
 NA?  Why did that happen?  Type 'dat' into the console and you'll see a print out of all 150 obversations.  Scroll back up to row 77, and you'll see that we have some missing data from John, which is recorded as NA by R.  
 
-We need to get rid of those NA's for the purposes of calculating the median.  There are several approaches.  We could subset the data using complete.cases.  But if you look at '?median', you'll see there is an argument called 'na.rm' that will strip the NA values out for us.
+We need to get rid of those NA's for the purposes of calculating the median.  There are several approaches.  For instance, we could subset the data using complete.cases() or is.na().  But if you look at '?median', you'll see there is an argument called 'na.rm' that will strip the NA values out for us.
 ```{r}
 median(dat$Weight, na.rm=TRUE)
 ```
@@ -228,7 +245,7 @@ weightmedian <- function(directory, day)  {
 You can test this function by running it a few different times:
 
 ```{r}
-weightmedian("diet_data", 20)
+weightmedian(directory = "diet_data", day = 20)
 weightmedian("diet_data", 4)
 weightmedian("diet_data", 17)
 ```

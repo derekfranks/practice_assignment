@@ -69,8 +69,8 @@ andy[30, "Weight"]
 
 Alternatively, you could create a subset of the 'Weight' column where the data where 'Day' is equal to 30.
 ```{r}
-andy[andy$Day == 30, "Weight"]
-andy[andy[,"Day"]==30, "Weight"]
+andy[which(andy$Day == 30), "Weight"]
+andy[which(andy[,"Day"] == 30), "Weight"]
 ```
 
 Or, we could use the subset function to do the same thing:

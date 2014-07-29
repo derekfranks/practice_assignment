@@ -148,7 +148,7 @@ Don't worry if you can't imagine when that would be useful because you'll see an
 
 Now, let's create a subset of the data frame that shows us just the 25th day for Andy and David.
 ```{r}
-day_25 <- andy_david[andy_david$Day == 25, ]
+day_25 <- andy_david[which(andy_david$Day == 25), ]
 day_25
 ```
 
@@ -206,7 +206,7 @@ median(dat$Weight, na.rm=TRUE)
 
 So 190 is the median weight.  We can find the median weight of day 30 by taking the median of a subset of the data where Day=30.
 ```{r}
-dat_30 <- dat[dat[, "Day"] == 30,]
+dat_30 <- dat[which(dat[, "Day"] == 30),]
 dat_30
 median(dat_30$Weight)
 ```
@@ -236,7 +236,7 @@ weightmedian <- function(directory, day)  {
         for (i in 1:5) {                                #loops through the files, rbinding them together 
                 dat <- rbind(dat, read.csv(files_list[i]))
         }
-        dat_subset <- dat[dat[, "Day"] == day,]         #subsets the rows that match the 'day' argument
+        dat_subset <- dat[which(dat[, "Day"] == day),]         #subsets the rows that match the 'day' argument
         median(dat_subset$Weight, na.rm=TRUE)           #identifies the median of the subset 
                                                         #while stripping out the NAs
 }

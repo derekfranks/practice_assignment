@@ -237,7 +237,7 @@ weightmedian <- function(directory, day)  {
                 dat <- rbind(dat, read.csv(files_list[i]))
         }
         dat_subset <- dat[which(dat[, "Day"] == day),]         #subsets the rows that match the 'day' argument
-        median(dat_subset$Weight, na.rm=TRUE)           #identifies the median of the subset 
+        median(dat_subset[, "Weight"], na.rm=TRUE)           #identifies the median weight 
                                                         #while stripping out the NAs
 }
 ```

@@ -24,7 +24,7 @@ You didn't assign a default value to `id`.  The first line of your function shou
 
 You probably have an open `(` somewhere in your code.  Double check it with a fine tooth comb to make sure you've closed all of your `()`, `{}`and `[]`.  
 
-###6) My code seems to work but my answer don't match the sample output.
+###6) My code seems to work but my answers don't match the sample output.
 
 Are you taking the mean of the mean value for each file?  That doesn't work mathematically.  You need to combine all of the relevant data into a single data frame or vector and take the mean of *that*.
 

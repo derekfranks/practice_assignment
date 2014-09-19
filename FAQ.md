@@ -1,34 +1,34 @@
 #FAQ's
 I thought I would pull together some frequently asked questions regarding Programming Assignment 1 that regularly show up on the forums.
 
-###1) My code runs fine and my answers match the sample output, but whenever I try to submit, I get a message telling me that my answer is incorrect.
+####1) My code runs fine and my answers match the sample output, but whenever I try to submit, I get a message telling me that my answer is incorrect.
 
 You're not submitting via the Coursera website are you?  You need to re-read the Assignment 1 instructions (all of them).  
 
 Instead of submitting via the website, you need to use the `submit()` script.  A link and more detailed instructions are included in the "Grading" section of the assignment 1 instructions.
 
-###2) Do I need to round my answers to match the sample output?
+####2) Do I need to round my answers to match the sample output?
 
 No.  You don't need to do any rounding to your results to pass the submission tests.
 
-###3) I only see 3 parts to the assignment.  What are these 10 parts listed on the assignment page?
+####3) I only see 3 parts to the assignment.  What are these 10 parts listed on the assignment page?
 
 You're correct that there are only 3 parts to assignment 1.  The 10 parts could probably me more accurately described as tests.  The `submit()` script will run your code with a variety of different parameters to test it.  If there are issues with your function, it may only pass some of thests.
 
-###4) My `pollutantmean()` passes the first 3 tests, but fails the 4th with the error message: "Error in pollutantmean("specdata", "nitrate") : 
+####4) My `pollutantmean()` passes the first 3 tests, but fails the 4th with the error message: "Error in pollutantmean("specdata", "nitrate") : 
   argument "id" is missing, with no default"
   
 You didn't assign a default value to `id`.  The first line of your function should look exactly like the one in the instructions:  `pollutantmean <- function(directory, pollutant, id = 1:332) {`
 
-###5) I get an error stating "unexpected '>' " or "unexpected '{' ".
+####5) I get an error stating "unexpected '>' " or "unexpected '{' ".
 
 You probably have an open `(` somewhere in your code.  Double check it with a fine tooth comb to make sure you've closed all of your `()`, `{}`and `[]`.  
 
-###6) My code seems to work but my answers don't match the sample output.
+####6) My code seems to work but my answers don't match the sample output.
 
 Are you taking the mean of the mean value for each file?  That doesn't work mathematically.  You need to combine all of the relevant data into a single data frame or vector and take the mean of *that*.
 
-###7) My function seems to work when `id` is a single value but I get the following error message when it's something like `70:72`: "In pollutant1$ID == 1:332 :  longer object length is not a multiple of shorter object length".
+####7) My function seems to work when `id` is a single value but I get the following error message when it's something like `70:72`: "In pollutant1$ID == 1:332 :  longer object length is not a multiple of shorter object length".
 
 Subsetting by ID works when id is a vector of length 1. However, when id = 1:10 for example, you have a problem. The issue goes back to the SWIRL example (and maybe lecture?) regarding how R handles vectors of differing lengths.
 
@@ -47,13 +47,13 @@ Essentially, there are 2 options to solve this.  The first is to not use a subse
 
 The other alternative is to replace the `==` with `%in%`.  In this case, the %in% operator will check each value of `id` against every value in the `ID` column, which is what you want.  The downside to this approach is that it will probably be very, very slow if you've followed the tutorial example to create `pollutantmean()`.
 
-###8) How do I subset for either `nitrate` or `sulfate` when I calculate the mean?
+####8) How do I subset for either `nitrate` or `sulfate` when I calculate the mean?
 
 If you wanted to subset nitrate, you would do that with `dat[, "nitrate"]`. Likewise you would use `dat[, "sulfate"]` for sulfate. When the function gets called you'll have something like: `pollutantmean(directory = "specdata", pollutant = "nitrate", id = 1:332)`.
 
 So if you have either `pollutant = "nitrate"` or `pollutant = "sulfate"`, what would you put in place of `"sulfate"` and `"nitrate"` in subsetting examples above so that it would work in either case?
 
-###9) I'm subsetting my data frame using `dat$pollutant` but it doesn't seem to be working.
+####9) I'm subsetting my data frame using `dat$pollutant` but it doesn't seem to be working.
 
 Recall from the lectures that $ makes R look for a literal name match. That's not what you want. You want to subset by the value of pollutant (either "sulfate" or "nitrate"), not by "pollutant" since you don't have a column by that name. So, you need to use brackets instead of $.
 

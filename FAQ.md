@@ -53,6 +53,8 @@ You want the first approach, not the second.
 
 ####7) My function seems to work when `id` is a single value but I get the following error message when it's something like `70:72`: "In pollutant1$ID == 1:332 :  longer object length is not a multiple of shorter object length".
 
+You probably have a line of code that looks something like this:  `dat_subset <- dat[which(dat[ , "ID"] == id), ]`
+
 Subsetting by `ID` works when `id` is a vector of length 1. However, when `id = 1:10` for example, you have a problem. The issue goes back to the SWIRL example (and maybe lecture?) regarding how R handles vectors of differing lengths.
 
 An example:

@@ -21,8 +21,7 @@ You're correct that there are only 3 parts to assignment 1.  The 10 parts could 
 
 
 
-####4) My `pollutantmean()` passes the first 3 tests, but fails the 4th with the error message: "Error in pollutantmean("specdata", "nitrate") : 
-  argument "id" is missing, with no default"
+####4) My `pollutantmean()` passes the first 3 tests, but fails the 4th with the error message: "Error in pollutantmean("specdata", "nitrate") : argument "id" is missing, with no default"
   
 You didn't assign a default value to `id`.  The first line of your function should look exactly like the one in the instructions:  `pollutantmean <- function(directory, pollutant, id = 1:332) {`
 

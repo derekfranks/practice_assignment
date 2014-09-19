@@ -7,7 +7,7 @@ You're not submitting via the Coursera website are you?  You need to re-read the
 
 Instead of submitting via the website, you need to use the `submit()` script.  A link and more detailed instructions are included in the "Grading" section of the assignment 1 instructions.
 
-
+If you're using the `submit()` script and still getting this error, double check to make sure you're not printing the results rather than returning them.  In other words, the final line of your code should not contain `print()`.  Use `return()` instead.
 
 ####2) Do I need to round my answers to match the sample output?
 

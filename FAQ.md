@@ -20,7 +20,7 @@ You're correct that there are only 3 parts to assignment 1.  The 10 parts could 
   
 You didn't assign a default value to `id`.  The first line of your function should look exactly like the one in the instructions:  `pollutantmean <- function(directory, pollutant, id = 1:332) {`
 
-###5) I get an error stating "unexpected '>'" or "unexpected '{'".
+###5) I get an error stating "unexpected '>' " or "unexpected '{' ".
 
 You probably have an open `(` somewhere in your code.  Double check it with a fine tooth comb to make sure you've closed all of your `()`, `{}`and `[]`.  
 

@@ -17,7 +17,7 @@ No.  You don't need to do any rounding to your results to pass the submission te
 
 ####3) I only see 3 parts to the assignment.  What are these 10 parts listed on the assignment page?
 
-You're correct that there are only 3 parts to assignment 1.  The 10 parts could probably me more accurately described as tests.  The `submit()` script will run your code with a variety of different parameters to test it.  If there are issues with your function, it may only pass some of the tests.
+You're correct that there are only 3 parts to assignment 1.  The 10 parts could probably be more accurately described as tests.  The `submit()` script will run your code with a variety of different parameters to test it.  If there are issues with your function, it may only pass some of the tests.
 
 
 

@@ -11,7 +11,7 @@ If you're using the `submit()` script and still getting this error, double check
 
 ####2) Do I need to round my answers to match the sample output?
 
-No.  You don't need to do any rounding to your results to pass the submission tests.
+No.  You don't need to do any rounding of your results to pass the submission tests.
 
 
 

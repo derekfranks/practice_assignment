@@ -35,7 +35,7 @@ You probably have an open `(` somewhere in your code.  Double check it with a fi
 
 ####6) My code seems to work but my answers don't match the sample output.
 
-Are you calculating the mean value for each file and then taking the mean of those means?  That doesn't work mathematically.  You need to combine all of the relevant data into a single data frame or vector and take the mean of *that*.
+Are you calculating the mean value for each file and then taking the mean of those means?  That's not the correct approach.  You need to combine all of the relevant data into a single data frame or vector and take the mean of *that*.
  
     a <- c(1:5)
     b <- c(1:10)

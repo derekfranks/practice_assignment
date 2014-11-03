@@ -1,4 +1,4 @@
-#FAQ's
+##FAQs
 I thought I would pull together some frequently asked questions regarding Programming Assignment 1 that regularly show up on the forums.
 
 ####1) My code runs fine and my answers match the sample output, but whenever I try to submit, I get a message telling me that my answer is incorrect.

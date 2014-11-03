@@ -68,7 +68,7 @@ Each value of y gets added to x. But because y is shorter than x, after adding 5
 
 That's what is happening with the subset when id is a vector longer than 1. The first row gets compared to the first value of id. The second row gets compared to the second value of id, etc. It repeats id until it gets to the end of the vector or data frame you're subsetting. The warning is telling you that the length of dat$nitrate or dat$sulfate is not divisible by the length of id.
 
-Essentially, there are 2 options to solve this.  The first is to not use a subset for `id` at all.  You presumably already have a loop in your code, so instead of combining all 332 files together, why not just combine only the files specified by `id` in the first place?
+Essentially, there are 2 options to solve this.  The first is to not use a subset for `id` at all.  You presumably already have a loop in your code, so instead of combining all 332 files together, why not use that loop to combine only the files specified by `id` in the first place?
 
 The other alternative is to replace the `==` with `%in%`.  In this case, the %in% operator will check each value of `id` against every value in the `ID` column, which is what you want.  The downside to this approach is that it will probably be very, very slow if you've followed the tutorial example to create `pollutantmean()`.
 

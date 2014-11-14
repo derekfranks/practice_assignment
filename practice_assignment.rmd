@@ -229,15 +229,16 @@ Essentially, these are all things that we've done in this example.  Now we just 
 
 So what does the function look like?
 
-```{r}
+```{r tidy=TRUE, tidy.opts=list(width.cutoff=60)}
 weightmedian <- function(directory, day)  {
         files_list <- list.files(directory, full.names=TRUE)   #creates a list of files
         dat <- data.frame()                             #creates an empty data frame
-        for (i in 1:5) {                                #loops through the files, rbinding them together 
+        for (i in 1:5) {                                
+                #loops through the files, rbinding them together 
                 dat <- rbind(dat, read.csv(files_list[i]))
         }
-        dat_subset <- dat[which(dat[, "Day"] == day),]         #subsets the rows that match the 'day' argument
-        median(dat_subset[, "Weight"], na.rm=TRUE)           #identifies the median weight 
+        dat_subset <- dat[which(dat[, "Day"] == day),]  #subsets the rows that match the 'day' argument
+        median(dat_subset[, "Weight"], na.rm=TRUE)      #identifies the median weight 
                                                         #while stripping out the NAs
 }
 ```
@@ -252,6 +253,54 @@ weightmedian("diet_data", 17)
 
 Hopefully, this has given you some practice applying the basic concepts from weeks 1 and 2.  If you can work your way through this example, you should have all of the tools needed to complete part 1 of assignment 1.  Parts 2 and 3 are really just expanding on the same basic concepts, potentially adding in some ideas like cbinds and if-else.
 
+***
+
 One last quick note:  The approach I'm showing above for building the data frame is submoptimal.  It works, but generally speaking, you don't want to build data frames or vectors by copying and re-copying them inside of a loop.  If you've got a lot of data it can become very, very slow.  However, this tutorial is meant to provide an introduction to these concepts, and you can use this approach successfully for programming assignments 1 and 3.
 
-If you're interested in learning the better approach, check out Hadley Wickam's excellent material on functionals within R:  http://adv-r.had.co.nz/Functionals.html.   But if you're new to both programming and R, I would skip it for now as it will just confuse you.  Come back and revisit it once you are able to write working functions using the approach above.
+If you're interested in learning the better approach, check out Hadley Wickam's excellent material on functionals within R:  http://adv-r.had.co.nz/Functionals.html.   But if you're new to both programming and R, I would skip it for now as it will just confuse you.  Come back and revisit it (and the rest of this section) once you are able to write working functions using the approach above.
+
+However, for those of you that do want to see a better way to create a dataframe....
+
+The main issue with the approach above is growing an object inside of loop by copying and recopying it.  It works, but it's slow and if you've got a lot of data, it will probably cause issues.  The better approach is to create an output object of an appropriate size and then fill it up.
+
+So the first thing we do is create an empty list that's the length of our expected output.  In this case, our input object is going to be `files_full`.  
+
+```{r}
+summary(files_full)
+tmp <- vector(mode = "list", length = length(files_full))
+summary(tmp)
+```
+
+Now we need to read in those csv files and drop them into `tmp`.
+
+```{r}
+for (i in seq_along(files_full)) {
+        tmp[[i]] <- read.csv(files_full[[i]])
+}
+str(tmp)
+```
+
+What we just did was read in each of the csv files and place them inside of our list.  Now we have a list of 5 elements called `tmp`, where each element of the list is a data frame containing each of the csv files.  It just so happens that what we just did is functionally identical to using `lapply`.
+
+```{r}
+str(lapply(files_full, read.csv))
+
+```
+
+This is part of the power of the apply family of functions.  You don't have to worry about the "housekeeping" of looping, and instead you can focus on the function you're using.  When you or somebody else comes back weeks later and reads through your code, it's easier to understand what you were doing and why.  If somebody says that the apply functions are more "expressive", this is what they mean.
+
+Now we still need to go from a list to a single data frame, although you *can* manipulate the data within this structure:
+
+```{r}
+summary(tmp[[1]])
+head(tmp[[1]][,"Day"])
+```
+
+We can use a function called `do.call()` to combine `tmp` into a single data frame. `do.call` lets you specify a function and then passes a list as if each element of the list were an argument to the function. The syntax is `do.call(function_you_want_to_use, list_of_arguments)`. In our case, we want to `rbind()` our list of data frames, `tmp`.
+
+```{r}
+output <- do.call(rbind, tmp)
+str(output)
+```
+
+This approach avoids all of the messy copying and recopying of the data to build the final data frame.  It's much more "R-like" and works quite a bit faster than our other approach.

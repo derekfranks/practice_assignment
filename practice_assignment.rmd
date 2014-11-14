@@ -263,7 +263,7 @@ However, for those of you that do want to see a better way to create a dataframe
 
 The main issue with the approach above is growing an object inside of loop by copying and recopying it.  It works, but it's slow and if you've got a lot of data, it will probably cause issues.  The better approach is to create an output object of an appropriate size and then fill it up.
 
-So the first thing we do is create an empty list that's the length of our expected output.  In this case, our input object is going to be `files_full`.  
+So the first thing we do is create an empty list that's the length of our expected output.  In this case, our input object is going to be `files_full` and our empty list is going to be `tmp`.
 
 ```{r}
 summary(files_full)
@@ -280,7 +280,7 @@ for (i in seq_along(files_full)) {
 str(tmp)
 ```
 
-What we just did was read in each of the csv files and place them inside of our list.  Now we have a list of 5 elements called `tmp`, where each element of the list is a data frame containing each of the csv files.  It just so happens that what we just did is functionally identical to using `lapply`.
+What we just did was read in each of the csv files and place them inside of our list.  Now we have a list of 5 elements called `tmp`, where each element of the list is a data frame containing one of the csv files.  It just so happens that what we just did is functionally identical to using `lapply`.
 
 ```{r}
 str(lapply(files_full, read.csv))
@@ -292,7 +292,7 @@ This is part of the power of the apply family of functions.  You don't have to w
 Now we still need to go from a list to a single data frame, although you *can* manipulate the data within this structure:
 
 ```{r}
-summary(tmp[[1]])
+str(tmp[[1]])
 head(tmp[[1]][,"Day"])
 ```
 

@@ -251,3 +251,7 @@ weightmedian("diet_data", 17)
 ```
 
 Hopefully, this has given you some practice applying the basic concepts from weeks 1 and 2.  If you can work your way through this example, you should have all of the tools needed to complete part 1 of assignment 1.  Parts 2 and 3 are really just expanding on the same basic concepts, potentially adding in some ideas like cbinds and if-else.
+
+One last quick note:  The approach I'm showing above for building the data frame is submoptimal.  It works, but generally speaking, you don't want to build data frames or vectors by copying and re-copying them inside of a loop.  If you've got a lot of data it can become very, very slow.  However, this tutorial is meant to provide an introduction to these concepts, and you can use this approach successfully for programming assignments 1 and 3.
+
+If you're interested in learning the better approach, check out Hadley Wickam's excellent material on functionals within R:  http://adv-r.had.co.nz/Functionals.html.   But if you're new to both programming and R, I would skip it for now as it will just confuse you.  Come back and revisit it once you are able to write working functions using the approach above.

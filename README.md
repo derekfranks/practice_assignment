@@ -11,4 +11,4 @@ The instructions are available in rmd and pdf formats.
 
 Just unzip the diet_data.zip file into your R working directory so that you've got a folder called 'diet_data' which contains 5 csv files.  I've included directions for doing this within R in the instructions.
 
-Hopefully others will find this useful.
+Also, once you start working on assignment 1, take a look at the FAQ linked above.  It addresses probably 80% of the questions people have when they get stuck.

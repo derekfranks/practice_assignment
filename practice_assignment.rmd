@@ -47,7 +47,7 @@ Alternatively, you could look at the dimensions of the data.frame:
 dim(andy)
 ```
 
-This tells us that we 30 rows of data in 4 columns.  There are some other commands we might want to run to get a feel for a new data file, `str()`, `summary()`, and `names()`.
+This tells us that we have 30 rows of data in 4 columns.  There are some other commands we might want to run to get a feel for a new data file, `str()`, `summary()`, and `names()`.
 
 ```{r}
 str(andy)
@@ -67,7 +67,7 @@ We can do the same thing to find his final weight on Day 30:
 andy[30, "Weight"]
 ```
 
-Alternatively, you could create a subset of the 'Weight' column where the data where 'Day' is equal to 30.
+Alternatively, you could create a subset of the 'Weight' column where the value of the 'Day' column is equal to 30.
 ```{r}
 andy[which(andy$Day == 30), "Weight"]
 andy[which(andy[,"Day"] == 30), "Weight"]
@@ -255,13 +255,13 @@ Hopefully, this has given you some practice applying the basic concepts from wee
 
 ***
 
-One last quick note:  The approach I'm showing above for building the data frame is submoptimal.  It works, but generally speaking, you don't want to build data frames or vectors by copying and re-copying them inside of a loop.  If you've got a lot of data it can become very, very slow.  However, this tutorial is meant to provide an introduction to these concepts, and you can use this approach successfully for programming assignments 1 and 3.
+One last quick note:  The approach I'm showing above for building the data frame is suboptimal.  It works, but generally speaking, you don't want to build data frames or vectors by copying and re-copying them inside of a loop.  If you've got a lot of data it can become very, very slow.  However, this tutorial is meant to provide an introduction to these concepts, and you can use this approach successfully for programming assignments 1 and 3.
 
 If you're interested in learning the better approach, check out Hadley Wickam's excellent material on functionals within R:  http://adv-r.had.co.nz/Functionals.html.   But if you're new to both programming and R, I would skip it for now as it will just confuse you.  Come back and revisit it (and the rest of this section) once you are able to write working functions using the approach above.
 
 However, for those of you that do want to see a better way to create a dataframe....
 
-The main issue with the approach above is growing an object inside of loop by copying and recopying it.  It works, but it's slow and if you've got a lot of data, it will probably cause issues.  The better approach is to create an output object of an appropriate size and then fill it up.
+The main issue with the approach above is growing an object inside of a loop by copying and recopying it.  It works, but it's slow and if you've got a lot of data, it will probably cause issues.  The better approach is to create an output object of an appropriate size and then fill it up.
 
 So the first thing we do is create an empty list that's the length of our expected output.  In this case, our input object is going to be `files_full` and our empty list is going to be `tmp`.
 

@@ -259,9 +259,9 @@ One last quick note:  The approach I'm showing above for building the data frame
 
 If you're interested in learning the better approach, check out Hadley Wickam's excellent material on functionals within R:  http://adv-r.had.co.nz/Functionals.html.   But if you're new to both programming and R, I would skip it for now as it will just confuse you.  Come back and revisit it (and the rest of this section) once you are able to write working functions using the approach above.
 
-However, for those of you that do want to see a better way to create a dataframe....
+So for those of you that do want to see a better way to create a dataframe....
 
-The main issue with the approach above is growing an object inside of a loop by copying and recopying it.  It works, but it's slow and if you've got a lot of data, it will probably cause issues.  The better approach is to create an output object of an appropriate size and then fill it up.
+As I said before, the main issue with the approach above is growing an object inside of a loop by copying and recopying it.  It works, but it's slow and inefficient.  The better approach is to create an output object of an appropriate size and then fill it up.
 
 So the first thing we do is create an empty list that's the length of our expected output.  In this case, our input object is going to be `files_full` and our empty list is going to be `tmp`.
 
@@ -280,14 +280,14 @@ for (i in seq_along(files_full)) {
 str(tmp)
 ```
 
-What we just did was read in each of the csv files and place them inside of our list.  Now we have a list of 5 elements called `tmp`, where each element of the list is a data frame containing one of the csv files.  It just so happens that what we just did is functionally identical to using `lapply`.
+What we just did was read in each of the csv files and place them inside of our list.  Now we have a list of 5 elements called `tmp`, where each element of the list is a data frame containing one of the csv files.  It just so happens that this is functionally identical to using `lapply`.
 
 ```{r}
 str(lapply(files_full, read.csv))
 
 ```
 
-This is part of the power of the apply family of functions.  You don't have to worry about the "housekeeping" of looping, and instead you can focus on the function you're using.  When you or somebody else comes back weeks later and reads through your code, it's easier to understand what you were doing and why.  If somebody says that the apply functions are more "expressive", this is what they mean.
+This is part of the power of the apply family of functions.  You don't have to worry about the "housekeeping" of looping, and instead you can focus on the function you're using.  When you or somebody else comes back weeks or months later and reads through your code, it's easier to understand what you were doing and why.  If somebody says that the apply functions are more "expressive", this is what they're talking about.
 
 Now we still need to go from a list to a single data frame, although you *can* manipulate the data within this structure:
 
@@ -296,7 +296,19 @@ str(tmp[[1]])
 head(tmp[[1]][,"Day"])
 ```
 
-We can use a function called `do.call()` to combine `tmp` into a single data frame. `do.call` lets you specify a function and then passes a list as if each element of the list were an argument to the function. The syntax is `do.call(function_you_want_to_use, list_of_arguments)`. In our case, we want to `rbind()` our list of data frames, `tmp`.
+
+One way to do this would be to manually `rbind` everything together:
+
+```{r}
+output <- rbind(tmp[[1]], tmp[[2]], tmp[[3]], tmp[[4]], tmp[[5]])
+str(output)
+```
+
+
+But of course there's a better way.  We can use a function called `do.call()` to combine `tmp` into a single data frame with much less typing. `do.call` lets you specify a function and then passes a list as if each element of the list were an argument to the function. 
+
+The syntax is `do.call(function_you_want_to_use, list_of_arguments)`. In our case, we want to `rbind()` our list of data frames, `tmp`.
+
 
 ```{r}
 output <- do.call(rbind, tmp)

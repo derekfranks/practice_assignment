@@ -1,7 +1,13 @@
 ---
+title: R Programming Practice Assignment
 output: pdf_document
 ---
-Practice Assignment
+
+##Derek Franks
+
+###Twitter: @derek_franks
+
+
 ========================================================
 
 The goal of this assignment is to provide a "bridge" between the first two weeks of lectures and assignment 1 for those either new to R or struggling with how to approach the assignment.

@@ -9,6 +9,4 @@ I've created a practice programming assignment that should help bridge the gap. 
 
 The instructions are available in rmd and pdf formats.
 
-Just unzip the diet_data.zip file into your R working directory so that you've got a folder called 'diet_data' which contains 5 csv files.  I've included directions for doing this within R in the instructions.
-
-Also, once you start working on assignment 1, take a look at the FAQ linked above.  It addresses probably 80% of the questions people have when they get stuck.
+Also, once you start working on assignment 1, take a look at the FAQ included at the end of the practice assignment.  It addresses probably 80% of the questions people have when they get stuck.
